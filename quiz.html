@@ -1,0 +1,94 @@
+<html>
+<head>
+<style>
+  body {
+    background-color: #f0f4ff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  .menu {
+    background-color: darkblue;
+    padding: 12px;
+  }
+  .menu a {
+    color: white;
+    margin: 0 12px;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  h1 {
+    color: darkblue;
+  }
+  #question {
+    font-size: 22px;
+    margin: 20px;
+  }
+  button {
+    display: block;
+    margin: 10px auto;
+    background-color: darkblue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    width: 220px;
+  }
+  #score {
+    font-size: 24px;
+    color: green;
+  }
+</style>
+</head>
+<body>
+<div class="menu">
+  <a href="index.html">Home</a>
+  <a href="todo.html">To-Do</a>
+  <a href="calculator.html">Calculator</a>
+  <a href="quiz.html">Quiz</a>
+</div>
+<h1>Web Quiz</h1>
+<p id="question"></p>
+<div id="options"></div>
+<p id="score"></p>
+
+<script>
+  var questions = [
+    { q: "Which tag makes the biggest heading?", options: ["<h1>", "<p>", "<li>"], answer: 0 },
+    { q: "Which language styles a web page?", options: ["HTML", "CSS", "JavaScript"], answer: 1 },
+    { q: "Which tag makes a link?", options: ["<a>", "<div>", "<ul>"], answer: 0 }
+  ];
+  var current = 0;
+  var score = 0;
+
+  function showQuestion() {
+    if (current === questions.length) {
+      document.getElementById("question").innerText = "Quiz finished!";
+      document.getElementById("options").innerHTML = "";
+      document.getElementById("score").innerText = "Your score: " + score + " / " + questions.length;
+      return;
+    }
+    var q = questions[current];
+    document.getElementById("question").innerText = q.q;
+    var box = document.getElementById("options");
+    box.innerHTML = "";
+    for (var i = 0; i < q.options.length; i++) {
+      var btn = document.createElement("button");
+      btn.innerText = q.options[i];
+      btn.setAttribute("onclick", "checkAnswer(" + i + ")");
+      box.appendChild(btn);
+    }
+  }
+
+  function checkAnswer(choice) {
+    if (choice === questions[current].answer) {
+      score++;
+    }
+    current++;
+    showQuestion();
+  }
+
+  showQuestion();
+</script>
+</body>
+</html>
