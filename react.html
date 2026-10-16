@@ -1,0 +1,70 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body {
+    background-color: #f0f4ff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  .menu {
+    background-color: darkblue;
+    padding: 12px;
+  }
+  .menu a {
+    color: white;
+    margin: 0 12px;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  h1 {
+    color: darkblue;
+  }
+  .count {
+    font-size: 32px;
+    color: green;
+  }
+  button {
+    background-color: darkblue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    margin: 5px;
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js"></script>
+</head>
+<body>
+<div class="menu">
+  <a href="index.html">Home</a>
+  <a href="todo.html">To-Do</a>
+  <a href="calculator.html">Calculator</a>
+  <a href="quiz.html">Quiz</a>
+</div>
+<h1>My First React App</h1>
+<div id="root"></div>
+
+<script type="text/babel">
+  function Counter() {
+    const [count, setCount] = React.useState(0);
+    return (
+      <div>
+        <p className="count">Count: {count}</p>
+        <button onClick={() => setCount(count + 1)}>Add 1</button>
+        <button onClick={() => setCount(0)}>Reset</button>
+      </div>
+    );
+  }
+
+  function App() {
+    return <Counter />;
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
