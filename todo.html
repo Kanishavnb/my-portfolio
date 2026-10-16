@@ -84,32 +84,68 @@
 <ul id="taskList"></ul>
 
 <script>
-  function addTask() {
-    var input = document.getElementById("taskInput");
-    var text = input.value;
-    if (text === "") {
-      return;
+  var tasks = [];
+
+  function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
+  function loadTasks() {
+    var saved = localStorage.getItem("tasks");
+    if (saved) {
+      tasks = JSON.parse(saved);
     }
+  }
+
+  function makeItem(index) {
+    var task = tasks[index];
     var item = document.createElement("li");
+    if (task.done) {
+      item.className = "done";
+    }
 
     var label = document.createElement("span");
-    label.innerText = text;
+    label.innerText = task.text;
     label.onclick = function() {
-      item.classList.toggle("done");
+      tasks[index].done = !tasks[index].done;
+      saveTasks();
+      showTasks();
     };
 
     var del = document.createElement("button");
     del.innerText = "Delete";
     del.className = "delete";
     del.onclick = function() {
-      item.remove();
+      tasks.splice(index, 1);
+      saveTasks();
+      showTasks();
     };
 
     item.appendChild(label);
     item.appendChild(del);
     document.getElementById("taskList").appendChild(item);
+  }
+
+  function showTasks() {
+    document.getElementById("taskList").innerHTML = "";
+    for (var i = 0; i < tasks.length; i++) {
+      makeItem(i);
+    }
+  }
+
+  function addTask() {
+    var input = document.getElementById("taskInput");
+    if (input.value === "") {
+      return;
+    }
+    tasks.push({ text: input.value, done: false });
+    saveTasks();
+    showTasks();
     input.value = "";
   }
+
+  loadTasks();
+  showTasks();
 </script>
 </body>
 </html>
