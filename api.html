@@ -1,0 +1,105 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body {
+    background-color: #f0f4ff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  .menu {
+    background-color: darkblue;
+    padding: 12px;
+  }
+  .menu a {
+    color: white;
+    margin: 0 12px;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  h1 {
+    color: darkblue;
+  }
+  button {
+    background-color: darkblue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  #status {
+    color: green;
+    font-size: 18px;
+    margin: 15px;
+  }
+  .card {
+    background-color: white;
+    margin: 10px auto;
+    padding: 12px;
+    width: 300px;
+    border-radius: 8px;
+    text-align: left;
+  }
+  .card h3 {
+    margin: 0 0 5px 0;
+    color: darkblue;
+  }
+  .card p {
+    margin: 3px 0;
+  }
+  @media (max-width: 600px) {
+    .menu a {
+      font-size: 14px;
+      margin: 0 6px;
+    }
+    h1 {
+      font-size: 24px;
+    }
+    .card {
+      width: 80%;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="menu">
+  <a href="index.html">Home</a>
+  <a href="todo.html">To-Do</a>
+  <a href="calculator.html">Calculator</a>
+  <a href="quiz.html">Quiz</a>
+</div>
+<h1>Users from an API</h1>
+<button onclick="loadUsers()">Load users</button>
+<p id="status"></p>
+<div id="users"></div>
+
+<script>
+  async function loadUsers() {
+    var status = document.getElementById("status");
+    var box = document.getElementById("users");
+    status.innerText = "Loading...";
+    box.innerHTML = "";
+
+    try {
+      var response = await fetch("https://jsonplaceholder.typicode.com/users");
+      var users = await response.json();
+
+      for (var i = 0; i < users.length; i++) {
+        var card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML =
+          "<h3>" + users[i].name + "</h3>" +
+          "<p>Email: " + users[i].email + "</p>" +
+          "<p>City: " + users[i].address.city + "</p>" +
+          "<p>Company: " + users[i].company.name + "</p>";
+        box.appendChild(card);
+      }
+      status.innerText = "Loaded " + users.length + " users";
+    } catch (error) {
+      status.innerText = "Something went wrong. Check your internet.";
+    }
+  }
+</script>
+</body>
+</html>
