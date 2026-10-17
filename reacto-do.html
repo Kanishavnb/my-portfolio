@@ -95,8 +95,15 @@
   }
 
   function TodoApp() {
-    const [tasks, setTasks] = React.useState([]);
+    const [tasks, setTasks] = React.useState(() => {
+      const saved = localStorage.getItem("reactTasks");
+      return saved ? JSON.parse(saved) : [];
+    });
     const [text, setText] = React.useState("");
+
+    React.useEffect(() => {
+      localStorage.setItem("reactTasks", JSON.stringify(tasks));
+    }, [tasks]);
 
     function addTask() {
       if (text === "") {
