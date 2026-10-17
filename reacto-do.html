@@ -1,0 +1,145 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body {
+    background-color: #f0f4ff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  .menu {
+    background-color: darkblue;
+    padding: 12px;
+  }
+  .menu a {
+    color: white;
+    margin: 0 12px;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  h1 {
+    color: darkblue;
+  }
+  input {
+    padding: 10px;
+    font-size: 16px;
+    width: 220px;
+  }
+  button {
+    background-color: darkblue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    background-color: white;
+    margin: 10px auto;
+    padding: 10px;
+    width: 300px;
+    border-radius: 8px;
+  }
+  li.done span {
+    text-decoration: line-through;
+    color: gray;
+  }
+  span {
+    cursor: pointer;
+  }
+  .delete {
+    background-color: red;
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-left: 10px;
+  }
+  @media (max-width: 600px) {
+    .menu a {
+      font-size: 14px;
+      margin: 0 6px;
+    }
+    h1 {
+      font-size: 24px;
+    }
+    li {
+      width: 80%;
+    }
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js"></script>
+</head>
+<body>
+<div class="menu">
+  <a href="index.html">Home</a>
+  <a href="todo.html">To-Do</a>
+  <a href="calculator.html">Calculator</a>
+  <a href="quiz.html">Quiz</a>
+</div>
+<h1>React To-Do List</h1>
+<div id="root"></div>
+
+<script type="text/babel">
+  function TodoItem(props) {
+    return (
+      <li className={props.task.done ? "done" : ""}>
+        <span onClick={props.onToggle}>{props.task.text}</span>
+        <button className="delete" onClick={props.onDelete}>Delete</button>
+      </li>
+    );
+  }
+
+  function TodoApp() {
+    const [tasks, setTasks] = React.useState([]);
+    const [text, setText] = React.useState("");
+
+    function addTask() {
+      if (text === "") {
+        return;
+      }
+      setTasks([...tasks, { text: text, done: false }]);
+      setText("");
+    }
+
+    function toggleTask(index) {
+      const updated = tasks.map((t, i) =>
+        i === index ? { text: t.text, done: !t.done } : t
+      );
+      setTasks(updated);
+    }
+
+    function deleteTask(index) {
+      setTasks(tasks.filter((t, i) => i !== index));
+    }
+
+    return (
+      <div>
+        <input
+          value={text}
+          placeholder="Type a task"
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button onClick={addTask}>Add</button>
+        <ul>
+          {tasks.map((task, index) => (
+            <TodoItem
+              key={index}
+              task={task}
+              onToggle={() => toggleTask(index)}
+              onDelete={() => deleteTask(index)}
+            />
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<TodoApp />);
+</script>
+</body>
+</html>
