@@ -6,6 +6,7 @@
     background-color: #f0f4ff;
     font-family: Arial, sans-serif;
     text-align: center;
+    margin: 0;
   }
   .menu {
     background-color: darkblue;
@@ -20,24 +21,58 @@
   h1 {
     color: darkblue;
   }
-  li {
-    color: green;
-    font-size: 20px;
+  h2 {
+    color: darkblue;
   }
-  .box {
-    border: 2px solid darkblue;
-    padding: 15px;
-    margin: 20px auto;
-    width: 300px;
-    border-radius: 10px;
+  .skills {
+    max-width: 500px;
+    margin: 0 auto;
   }
-  button {
+  .skill {
+    display: inline-block;
     background-color: darkblue;
     color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
+    padding: 6px 14px;
+    margin: 5px;
+    border-radius: 20px;
     font-size: 16px;
+  }
+  .projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+  }
+  .card {
+    background-color: white;
+    border: 2px solid darkblue;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    width: 260px;
+  }
+  .card h3 {
+    margin-top: 0;
+    color: darkblue;
+  }
+  .card p {
+    font-size: 15px;
+  }
+  .card a {
+    display: inline-block;
+    background-color: darkblue;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .footer {
+    margin: 30px 0;
+  }
+  .footer a {
+    color: darkblue;
+    font-size: 18px;
   }
   @media (max-width: 600px) {
     .menu a {
@@ -47,7 +82,7 @@
     h1 {
       font-size: 24px;
     }
-    .box {
+    .card {
       width: 80%;
     }
   }
@@ -60,26 +95,66 @@
   <a href="calculator.html">Calculator</a>
   <a href="quiz.html">Quiz</a>
 </div>
+
 <h1>Hello, I am Kanisha</h1>
-<p>I am learning to build websites.</p>
+<p>M.E. Software Engineering graduate learning web development.</p>
+
 <h2>My skills</h2>
-<ul>
-  <li>HTML</li>
-  <li>Learning CSS</li>
-</ul>
-<div class="box">
-  <h2>My project</h2>
-  <p>Traffic signal system for emergency vehicles.</p>
-  <a href="https://github.com/Kanishavnb">My GitHub</a>
+<div class="skills">
+  <span class="skill">HTML</span>
+  <span class="skill">CSS</span>
+  <span class="skill">JavaScript (basics)</span>
+  <span class="skill">React (basics)</span>
+  <span class="skill">REST APIs (fetch)</span>
+  <span class="skill">Responsive Design</span>
+  <span class="skill">GitHub</span>
 </div>
 
-<button onclick="showMessage()">Press me</button>
-<p id="message"></p>
+<h2>My projects</h2>
+<div class="projects">
+  <div class="card">
+    <h3>To-Do List</h3>
+    <p>Add, complete and delete tasks. Tasks are saved with localStorage.</p>
+    <a href="todo.html">Open</a>
+  </div>
+  <div class="card">
+    <h3>Calculator</h3>
+    <p>Add, subtract, multiply and divide, with a divide-by-zero check.</p>
+    <a href="calculator.html">Open</a>
+  </div>
+  <div class="card">
+    <h3>Web Quiz</h3>
+    <p>A quiz that checks answers and shows your final score.</p>
+    <a href="quiz.html">Open</a>
+  </div>
+  <div class="card">
+    <h3>User Directory (API)</h3>
+    <p>Loads users from a public API with fetch and has a live search.</p>
+    <a href="api.html">Open</a>
+  </div>
+  <div class="card">
+    <h3>React Counter</h3>
+    <p>My first React app using a component and state.</p>
+    <a href="react.html">Open</a>
+  </div>
+  <div class="card">
+    <h3>React To-Do List</h3>
+    <p>The to-do app rebuilt in React with components and props.</p>
+    <a href="react-todo.html">Open</a>
+  </div>
+  <div class="card">
+    <h3>React User Directory</h3>
+    <p>The API user list in React using useState and useEffect.</p>
+    <a href="react-users.html">Open</a>
+  </div>
+  <div class="card">
+    <h3>RFID Traffic Signal System</h3>
+    <p>Academic project: an RFID-based system that gives emergency vehicles priority at traffic signals.</p>
+  </div>
+</div>
 
-<script>
-  function showMessage() {
-    document.getElementById("message").innerText = "I just wrote my first JavaScript!";
-  }
-</script>
+<div class="footer">
+  <a href="https://github.com/Kanishavnb">My GitHub</a>
+</div>
 </body>
 </html>
