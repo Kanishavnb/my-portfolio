@@ -10,6 +10,8 @@
     "body.dark h1, body.dark h2, body.dark h3, body.dark label { color: #9db4ff !important; }" +
     // dark mode cards, boxes and list items
     "body.dark .card, body.dark .box, body.dark li { background-color: #1e2638 !important; color: #e8ecf5 !important; border-color: #9db4ff !important; }" +
+    // brighter blue for skill badges and Open buttons in dark mode
+    "body.dark .skill, body.dark .card a { background-color: #3b5bdb !important; color: white !important; }" +
     // the look and position of the button
     "#themeBtn { position: fixed; bottom: 15px; right: 15px; background-color: #444; color: white; border: none; border-radius: 20px; padding: 10px 16px; font-size: 14px; cursor: pointer; }";
   document.head.appendChild(style);
